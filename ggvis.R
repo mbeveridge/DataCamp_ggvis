@@ -1,4 +1,4 @@
-Section 1 - Introduction to ggvis
+# Section 1 - Introduction to ggvis
 
 # ggvis is an R package, a collection of functions and data sets that enhance the R language.
 # ggvis helps you visualize data sets.
@@ -33,9 +33,48 @@ mtcars %>% ggvis(~wt, ~mpg) %>% layer_points() %>% layer_smooths()
 
 ==========
 
-Section 2 - The grammar of ggvis
+# Section 2 - The grammar of ggvis
+
+# ggvis follows the grammar of graphics.
+#You can combine a set of data, properties and marks with the following format.
+
+#<data>  %>%
+#  ggvis(~<x property>,~<y property>,
+#        fill = ~<fill property>, ...) %>%
+#  layer_<marks>()
 
 
 
+# Adapt the code: show bars instead of points
+# pressure %>% ggvis(~temperature, ~pressure) %>% layer_points()
+pressure %>% ggvis(~temperature, ~pressure) %>% layer_bars()
+
+# Adapt the code: show lines instead of points
+# pressure %>% ggvis(~temperature, ~pressure) %>% layer_points()
+pressure %>% ggvis(~temperature, ~pressure) %>% layer_lines()
+
+# Extend the code: map the fill property to the temperature variable
+# pressure %>% ggvis(~temperature, ~pressure) %>% layer_points()
+pressure %>% ggvis(~temperature, ~pressure, fill = ~temperature) %>% layer_points()
+
+# Extend the code: map the size property to the pressure variable
+# pressure %>% ggvis(~temperature, ~pressure) %>% layer_points()
+pressure %>% ggvis(~temperature, ~pressure, size = ~pressure) %>% layer_points()
+
+
+#----------
+
+# 4 essential components of a graph
+# Every ggvis graph contains 4 essential components: data, a coordinate system, marks and corresponding properties.
+# By changing the values of each of these components you can create a vast array of unique plots.
+
+# eg.
+  
+  faithful %>%
+  ggvis(~waiting, ~eruptions, fill := "red") %>%
+  layer_points() %>%
+  add_axis("y", title = "Duration of eruption (m)",
+           values = c(2, 3, 4, 5), subdivide = 9) %>%
+  add_axis("x", title = "Time since previous eruption (m)")
 
 
